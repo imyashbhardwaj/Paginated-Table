@@ -1,0 +1,282 @@
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+</head>
+<body>
+
+<div class=container>
+
+<div id="topbar">
+
+<div class="btn-group">
+  <button id="fbutton">137<Br>Reported</button>
+
+  <button><font color=red>04</font><Br>Infected</button>
+  <button>69<Br>Observation</button>
+  <button>23<Br>Locations</button>
+</div>
+
+</div>
+
+<br>
+
+<div id="table-div">
+<div id="table-content"><br>
+  
+  <div class="row">
+  <div class="col-lg-6">
+
+  <h3> Reportees List</h3>
+</div>
+<div  class="col-lg-6 text-right">
+  
+  <ul  class="pagination">
+    
+  <li class=disabled><a id="pagenumber" href="#">1 of 7</a></li>
+  <li><a id="prevbutton" href="#"><</a></li>
+  <li><a id="nextbutton"href="#">></a></li>
+ 
+</ul>
+
+</div>
+
+  <br>
+  
+  <br>
+
+  <table id=data align="center" width=98%>
+  
+
+
+
+  </table>
+
+<br>
+<br>
+</div>
+</div>
+</div>
+
+&emsp;Contact &nbsp;&nbsp;&#8226;&nbsp;&nbsp; Privacy &nbsp;&nbsp;&#8226;&nbsp;&nbsp; Terms of Use &nbsp;&nbsp;&#8226;&nbsp;&nbsp;Accessibility &nbsp;&nbsp;&#8226;&nbsp;&nbsp; Cookie preferences
+</div>
+</body>
+
+
+</html>
+<script>
+
+
+
+console.log("Hello")
+var data=[]
+var record={
+  "name":"First Name, Last Name",
+  "id":"loremipsum@example.com",
+  "phone":"91234556789",
+  "status":"Negative",
+  "code":"XYZ",
+  "Reports":"First Name, Last Name",
+  "Phone":"9987654321"
+}
+
+
+for(i=0;i<50;i++){
+  data.push(record)
+}
+console.log(data)
+
+
+var size=data.length
+var pagenumber = 1
+
+var totalpages=0
+    if(size%20==0){
+      totalpages=size/20
+    }
+    else{
+      totalpages=parseInt(size/20)+1
+    }
+
+var theader="<tr><th>Employee Name</th><th>Email ID</th><th>Phone</th><th>Status</th><th>Location Code</th><th>Reports To</th><th>Phone</th><th>Location</th></tr>"
+    var s=theader
+    for(i=0;i<20;i++){
+
+      s+="<tr><td><font color='blue'>"+data[i].name+"</font></td>"+"<td>"+data[i].id+"</td>"+"<td>"+data[i].phone+"</td>"+"<td>"+"<font color='red'>Positive</font>"+"</td>"+"<td>"+data[i].code+"</td>"+"<td><font color='blue'>"+data[i].Reports+"</font></td>"+"<td>"+data[i].Phone+"</td><td><a href='#'>View Details</a></td></tr>"
+    }
+
+
+//console.log(s)
+$("#data").html(s)
+$("#pagenumber").html("1 of "+totalpages)
+
+
+$("#nextbutton").click(function(){
+  console.log("size="+size+" pagenumber="+pagenumber)
+  if((pagenumber*20)<size && pagenumber>0 && (pagenumber<=(size/20))){
+    var theader="<tr><th>Employee Name</th><th>Email ID</th><th>Phone</th><th>Status</th><th>Location Code</th><th>Reports To</th><th>Phone</th><th>Location History</th></tr>"
+    var s=theader
+    for(i=pagenumber*20;i<size;i++){
+
+      s+="<tr><td><font color='blue'>"+data[i].name+"</font></td>"+"<td>"+data[i].id+"</td>"+"<td>"+data[i].phone+"</td>"+"<td>"+"<font color='red'>Positive</font>"+"</td>"+"<td>"+data[i].code+"</td>"+"<td><font color='blue'>"+data[i].Reports+"</font></td>"+"<td>"+data[i].Phone+"</td><td><a href='#'>View Details</a></td></tr>"
+    }
+
+
+//console.log(s)
+$("#data").html(s)
+    pagenumber=pagenumber+1;
+    
+    $("#pagenumber").html(pagenumber+" of "+totalpages)
+    }
+
+  
+
+
+});
+
+$("#prevbutton").click(function(){
+
+  console.log("size="+size+" pagenumber="+pagenumber)
+  if(size>20&&pagenumber>1){
+    pagenumber=pagenumber-1;
+    var theader="<tr><th>Employee Name</th><th>Email ID</th><th>Phone</th><th>Status</th><th>Location Code</th><th>Reports To</th><th>Phone</th><th>Location History</th></tr>"
+    var s=theader
+    for(i=(pagenumber-1)*20;i<size;i++){
+
+      s+="<tr><td><font color='blue'>"+data[i].name+"</font></td>"+"<td>"+data[i].id+"</td>"+"<td>"+data[i].phone+"</td>"+"<td>"+"<font color='red'>Positive</font>"+"</td>"+"<td>"+data[i].code+"</td>"+"<td><font color='blue'>"+data[i].Reports+"</font></td>"+"<td>"+data[i].Phone+"</td><td><a href='#'>View Details</a></td></tr>"
+    }
+
+
+//console.log(s)
+$("#data").html(s)
+
+
+    
+    $("#pagenumber").html(pagenumber+" of "+totalpages)
+
+    }
+
+  
+
+
+});
+
+// for (i = 0; i < 11; i++) { 
+//   s+="<tr><td><font color='blue'>"+record.name+"</font></td>"+"<td>"+record.id+"</td>"+"<td>"+record.phone+"</td>"+"<td>"+record.status+"</td>"+"<td>"+record.code+"</td>"+"<td><font color='blue'>"+record.Reports+"</font></td>"+"<td>"+record.Phone+"</td><td><a href='#'>View Details</a></td></tr>"
+
+// }
+// s+="<tr><td><font color='blue'>"+record.name+"</font></td>"+"<td>"+record.id+"</td>"+"<td>"+record.phone+"</td>"+"<td>"+"<font color='red'>Positive</font>"+"</td>"+"<td>"+record.code+"</td>"+"<td><font color='blue'>"+record.Reports+"</font></td>"+"<td>"+record.Phone+"</td><td><a href='#'>View Details</a></td></tr>"
+
+// for (i = 0; i < 10; i++) { 
+//   s+="<tr><td><font color='blue'>"+record.name+"</font></td>"+"<td>"+record.id+"</td>"+"<td>"+record.phone+"</td>"+"<td>"+record.status+"</td>"+"<td>"+record.code+"</td>"+"<td><font color='blue'>"+record.Reports+"</font></td>"+"<td>"+record.Phone+"</td><td><a href='#'>View Details</a></td></tr>"
+
+// }
+// var theader="<tr><th>Employee Name</th><th>Email ID</th><th>Phone</th><th>Status</th><th>Location Code</th><th>Reports To</th><th>Phone</th><th>Location History</th></tr>"
+
+// var s=theader+"<tr><td><font color='blue'>"+record.name+"</font></td>"+"<td>"+record.id+"</td>"+"<td>"+record.phone+"</td>"+"<td>"+"<font color='red'>Positive</font>"+"</td>"+"<td>"+record.code+"</td>"+"<td><font color='blue'>"+record.Reports+"</font></td>"+"<td>"+record.Phone+"</td><td><a href='#'>View Details</a></td></tr>"
+
+// for (i = 0; i < 11; i++) { 
+//   s+="<tr><td><font color='blue'>"+record.name+"</font></td>"+"<td>"+record.id+"</td>"+"<td>"+record.phone+"</td>"+"<td>"+record.status+"</td>"+"<td>"+record.code+"</td>"+"<td><font color='blue'>"+record.Reports+"</font></td>"+"<td>"+record.Phone+"</td><td><a href='#'>View Details</a></td></tr>"
+
+// }
+// s+="<tr><td><font color='blue'>"+record.name+"</font></td>"+"<td>"+record.id+"</td>"+"<td>"+record.phone+"</td>"+"<td>"+"<font color='red'>Positive</font>"+"</td>"+"<td>"+record.code+"</td>"+"<td><font color='blue'>"+record.Reports+"</font></td>"+"<td>"+record.Phone+"</td><td><a href='#'>View Details</a></td></tr>"
+
+// for (i = 0; i < 10; i++) { 
+//   s+="<tr><td><font color='blue'>"+record.name+"</font></td>"+"<td>"+record.id+"</td>"+"<td>"+record.phone+"</td>"+"<td>"+record.status+"</td>"+"<td>"+record.code+"</td>"+"<td><font color='blue'>"+record.Reports+"</font></td>"+"<td>"+record.Phone+"</td><td><a href='#'>View Details</a></td></tr>"
+
+// }
+// console.log(s)
+// $("#data").html(s)
+</script>
+
+
+<style>
+.container{
+  width:100%;
+}
+body{
+background:rgb(230,230,230);
+}
+.fa{
+  color:blue;
+  font-size: 35px;
+}
+#topbar{
+  background:white;
+  margin-left:15px;
+  margin-right:15px;
+  box-shadow: 2px 2px;
+  
+}
+
+#table-div{
+  background:white;
+  margin-left:15px;
+  margin-right:15px;
+  box-shadow: 2px 2px;
+  
+}
+#table-content{
+  
+  margin-left:15px;
+  margin-right:15px;
+}
+table{
+  border-style:solid;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-width: 1px;
+  
+
+}
+tr {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-collapse: collapse;
+}
+
+.btn-group button{
+  height:90px;
+  font-size:20px;
+  background: red;
+}
+td,th{
+  text-align: center;
+  height: 27px;
+} 
+.btn-group button{
+  background:rgb(255,255,255);
+}
+
+#fbutton{
+   border-right: 4px solid #CFCFCF; 
+}
+
+.pagination{
+  align-content: right;
+}
+
+#pagebuttons{
+  display: inline-block;
+}
+
+ul.tree {
+    display: inline-block;
+    margin: 0 0 0 10px;
+    padding: 0;
+    vertical-align: top;
+}
+#pnumber{
+  border-style: : none;
+}
+</style>
+
+
